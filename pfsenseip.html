@@ -1,7 +1,14 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script>
-  $.getJSON("https://api.ipify.org?format=json", function(data) {
-    document.write("Current IP Address: " + data.ip);
-  });
+  var xmlhttp = new XMLHttpRequest();
+  var url = "https://api.ipify.org?format=json";
+
+  xmlhttp.onreadystatechange = function() {
+      if (this.readyState == 4 && this.status == 200) {
+          var data = JSON.parse(this.responseText);
+          document.write("Current IP Address: " + data.ip);
+      }
+  };
+  xmlhttp.open("GET", url, true);
+  xmlhttp.send();
 </script>
-<p id="pfsense"></p>
